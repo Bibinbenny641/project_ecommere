@@ -1,0 +1,110 @@
+
+{% block content %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+  <head>
+    <link rel="stylesheet" href="{% static 'admin/assets/css/tailwind.output.css'%}" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="assets/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <title>Sign In | admin</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="{% static 'admin/css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" href=" {% static 'admin/css/lineicons.css'%} " />
+    <link rel="stylesheet" href=" {% static 'admin/css/materialdesignicons.min.css'%}" />
+    <link rel="stylesheet" href=" {% static 'loginadmin/css/fullcalendar.css'%}" />
+    <link rel="stylesheet" href=" {% static 'admin/css/main.css'%}" />
+  <body>
+    <div class="row g-0 auth-row">
+        <div class="col-lg-6">
+          <div class="auth-cover-wrapper bg-primary-100">
+            <div class="auth-cover">
+              <div class="title text-center">
+                <h1 class="text-primary mb-10">MoreBuy</h1>
+                <p class="text-medium">
+                  Anything you wants..
+                </p>
+              </div>
+              <div class="cover-image">
+                <img src="{% static 'admin/images/auth/signin-image.svg'%}" alt="" />
+              </div>
+              <div class="shape-image">
+                <img src="{% static 'loginadmin/images/auth/shape.svg'%}" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end col -->
+        <div class="col-lg-6">
+          <div class="signin-wrapper">
+            <div class="form-wrapper">
+              <h6 class="mb-15"> <strong>ADMIN ONLY </strong></h6>
+              <p class="text-sm mb-25">
+                <strong>
+                    Do whatever you want
+                </strong>
+              </p>
+              
+              <form action="" method="POST" name="admin_login">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-style-1">
+                      <label>email</label>
+                      <input type="email" name="email" placeholder="email" required >
+                    </div>
+                  </div>
+                  <!-- end col -->
+                  <div class="col-12">
+                    <div class="input-style-1">
+                      <label>Password</label>
+                      <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                  </div>
+                  <!-- end col -->
+                  
+                  <!-- end col -->
+                  <div class="col-xxl-6 col-lg-12 col-md-6">
+                    
+                  </div>
+                  <!-- end col -->
+                  <div class="col-12">
+                    <div
+                      class="
+                        button-group
+                        d-flex
+                        justify-content-center
+                        flex-wrap
+                      "
+                    >  
+                      <button type="submit"
+                        class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Log In
+                      </button>
+                    </a>
+              
+                    
+                    </div>
+                  </div>
+                </div>
+                <!-- end row -->
+              </form>
+              
+            </div>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+    
+    
+  </body>
+{% endblock content %}

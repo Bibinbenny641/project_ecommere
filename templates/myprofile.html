@@ -1,0 +1,246 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title></title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            margin: 0;
+            background-color: white;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .the__cover {
+            background-color: #768e81;
+            margin: 5% 20% 0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 2px 2px 1px 1px rgba(255, 255, 255, 0.3), -2px -2px 1px 1px rgba(255, 255, 255, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .title {
+            color: white;
+            font-weight: 500;
+            /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+        }
+
+        .img__box img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .col2__box {
+            display: flex;
+            justify-content: center;
+        }
+
+        .credentials {
+            color: rgb(255, 255, 255);
+            font-size: 15px;
+            font-weight: 300;
+            text-align: center;
+            margin-right: auto;
+        }
+
+        .credentials span {
+            color: #c1c1c1
+        }
+
+        .the__cover h3 {
+            margin: 10px;
+        }
+
+        .the_cover .div_col3 {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .div__col4 {
+            display: flex;
+
+            justify-content: space-evenly;
+
+        }
+
+        .button__div .the__button {
+            margin: 20px auto auto;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: #14f77a;
+            border-radius: 7px;
+            box-shadow: 2px 2px 1px 1px rgba(179, 178, 178, 0.3), -2px -2px 1px 1px rgba(179, 178, 178, 0.3);
+
+        }
+
+        @media screen and (max-width:700px){
+            body {
+                background-color: rgb(255, 0, 0);
+                display: flex;
+                justify-content: center;
+            }
+
+            .the__cover {
+                width: 80vw;
+                margin: 0;
+            }
+
+            .button__div .the__button {
+                font-size: 15px;
+                padding: 5px 10px;
+            }
+
+            .credentials {
+                font-size: 15px;
+            }
+            .right__div h3{
+                font-size: 14px;
+            }
+        }
+        @media screen and (max-width:986px){
+        
+            .button__div .the__button{
+                font-size: 15px;
+                padding: 5px 5px;
+            }
+        }
+        @media screen and (max-width:450px){
+            .button__div .the__button{
+                font-size: 10px;
+                padding: 4px;
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+</head>
+
+<body>
+    
+    <div>
+        <div style="padding-top:40px ;" % class="the__cover">
+            <div class="title">
+                <center>
+                   <a style="text-decoration: none ; color: black;" href="{% url 'viewproduct' %}"><h2>More buy </h2></a> 
+                </center>
+            </div>
+            <div class="div__col1">
+                <div class="img__box">
+                    <center><img
+                            src="https://th.bing.com/th/id/OIP._rjR8ySrZIu2qgmI5Xx8JwHaNK?w=182&h=324&c=7&r=0&o=5&dpr=1.25&pid=1.7"
+                            width="200px" height="200px" alt="o,agelajlj"></center>
+                </div>
+                <hr>
+            </div>
+            <div class="div__col2">
+                <div class="col2__box">
+                    <div class="name credentials">
+                        <span>Name</span>
+                        <h3> {{ob.fullname }}</h3>
+                        <span><div class="button__div">
+                            <a href="{% url 'editprofile' %}"><button class="the__button"> Change Name </button></a>
+                        </div> </span>
+                    </div>
+                    <hr>
+                    <div class="phone__number credentials">
+                        <span>Phone number</span>
+                        <h3> {{ob.phoneno}} </h3>
+
+                    </div>
+
+                </div>
+            </div>
+            <hr style="width:100% ;">
+            <div class="div__col3 credentials">
+                <div class="left__div">
+                    <span>Email</span>
+                    <center><h3> {{ob.email}} </h3></center>
+                </div>
+                <hr>
+
+                <div class="right__div">
+                    <!-- <span>Address</span> -->
+                    <!-- {% for i in o %}
+                    <h3>{{i.housename}}, {{i.city1}},{{i.district1}},{{i.zipcode1}}</h3>
+                    {% endfor %} -->
+                    <table  class="w-full whitespace-no-wrap " id="table">
+                        <thead>
+        
+                          <tr>
+                            <th>No.</th>
+                            <th>Addresses</th>
+                            
+                          </tr>
+                         
+                        </thead>
+                        <tbody>
+                          
+                          {% for i in o %}
+                          <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.housename}} , {{  i.city1}} ,{{i.district1  }} ,{{i.zipcode1}}</td>
+                            <td><a class="btn btn-primary" href="{% url 'deleteaddress' i.id %}">Delete</a></td>
+        
+                          </tr>
+        
+                          
+        
+                          {% endfor %}
+                          
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <hr style="width:100% ;">
+            <div class="div__col4">
+
+                <!-- <div class="button__div">
+                    <a href="{% url 'editprofile' %}"><button class="the__button"> Edit Profile </button></a>
+                </div> -->
+                <hr>
+                <div class="button__div">
+                    <a href="{% url 'changepassword' %}"><button class="the__button"> Change Password </button></a>
+                </div>
+                <div class="button__div">
+                    <a href="{% url 'address' %}"><button class="the__button"> Add Address </button></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+        <script>
+            {% for n in messages %}
+            swal('{{ n }}')
+            {% endfor %}
+          </script>
+</body>
+
+</html>

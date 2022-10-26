@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="{% static 'admin/css/single.css'%}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'user/vendor/animsition/css/animsition.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/css/main.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/css/util.css'%}">
+
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+
+  <body class="bg-light">
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Checkout form</h2>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+            
+              {% for message in messages %}
+				      	<h3 style="color: red;"> {{ message }}</h3>
+					      {% endfor %}
+            
+            </div>
+            <span class="text-muted">Your cart</span>
+            
+            <span class="badge badge-secondary badge-pill"></span>
+          </h4>
+
+          <ul class="list-group mb-3">
+            {% for i in ob %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                
+                <h6 class="my-0">{{ i.productname }}</h6>
+                <small>{{i.price}}</small>
+              </div>
+              <span class="text-muted">{{i.amount}}</span>
+            </li>
+
+            {% endfor %}
+
+
+
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              
+              <span class="text-success"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total- {{total}} </span>
+              <strong></strong>
+            </li>
+          </ul>
+
+
+          <form name="coup" id="cou" class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" name="coupon" placeholder="Coupon code">
+              <div class="input-group-append">
+                <button name="coupons" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer "
+              role="button" type="submit">Apply Coupon</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing address</h4>
+          <form class="needs-validation" method="post" novalidate>
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">Name</label>
+                <input type="text" class="form-control flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" name="name" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Name is required.
+                </div>
+              </div>
+              
+            </div>
+
+            
+            <div class="mb-3">
+              <div class="form-group mb-2">
+                {% if add %}
+                <label for="address">Saved Address</label><br>
+                
+                <select name="address" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                  {% for i in add %}
+                  
+                  <option style="height: 20px;" value="{{i.id}}" >
+                    {{i.user}}   
+                    ,<br>{{i.housename}}  
+                     ,{{i.city1}} 
+                      ,{{i.district1}}  
+                      ,<br>{{i.zipcode1}}
+                  </option >
+                  {% endfor %}
+                </select>
+                {% else %}
+                <p>add address here</p>
+                <a href="{% url 'address' %}" class="btn btn-primary">Add Address</a>
+
+                
+                {% endif %}
+                
+                
+              </div>
+            </div>
+
+            
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+              <div class="form-group mb-2">
+                <label> Method </label>
+
+                <select style="width: 135px;" name="method" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+
+                  <option value="COD">COD</option>
+                  <option value="paypal">PayPal</option>
+                  <option value="razorpay">RazorPay</option>
+                </select>
+               
+
+              </div>
+
+              <hr class="mb-4">
+              
+              {% if add %}
+             
+              <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer "
+              role="button" type="submit">Place Order</button>
+              {% endif %}
+              
+              
+          </form>
+        </div>
+      </div>
+
+      
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+      crossorigin="anonymous"></script>
+    <script src="https://getbootstrap.com/docs/4.3/examples/checkout/form-validation.js"></script>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

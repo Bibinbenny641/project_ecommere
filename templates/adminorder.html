@@ -1,0 +1,143 @@
+
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+
+        <main class="h-full pb-16 overflow-y-auto">
+          <div class="container px-6 mx-auto grid">
+            <h2
+              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
+            >
+              Orders
+            </h2>
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+
+            <div class="w-full overflow-x-auto">
+              <table class="w-full whitespace-no-wrap">
+                <thead>
+                  <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                  >
+                    <th class="px-4 py-3">Id</th>
+                    
+                    
+                    <th class="px-4 py-3">Quantity</th>
+                    <th class="px-4 py-3">User ID</th>
+                    <th class="px-4 py-3">Product ID</th>
+                    <th class="px-4 py-3">Amount</th>
+                    <th class="px-4 py-3">Payment</th>
+                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Order Status</th>
+                    <th class="px-4 py-3">Confirm</th>
+                    <th class="px-4 py-3">Date</th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                >
+                {% for i in ob %}
+                  <tr class="text-gray-700 dark:text-gray-400">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center text-sm">
+                        
+                        <div>
+                          <p class="font-semibold"> {{i.id}}</p>
+                          
+                        </div>
+                      </div>
+                    </td>
+                    
+                    <td class="px-4 py-3 text-sm">
+                      {{i.quantity}}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{i.userid_id}}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{i.productid_id}}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{i.totalamount}}
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{i.method}}
+                    </td>
+                    
+                    <td class="px-4 py-3 text-sm">
+                      <span 
+                        class=""
+                      >
+                      {% if i.orderstatus != 'shipped' and i.orderstatus != 'deliverd' %}
+                      {% if i.status%}<a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}" class=" px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" href="{% url 'cancelorderr' i.id %}" role="button">Cancel </a>{% else %}<a  class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700 " href="{% url 'cancelorderr' i.id %}" role="button">Cancelled</a>{% endif %}
+                     
+                      {% endif %}
+                      </span>
+                    </td>
+                    <td style="color: green ;" class="px-4 py-3 text-sm">
+                      <strong>{{ i.orderstatus }}</strong>
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      <span
+                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                      >
+                      {% if i.orderstatus%}<a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2{{i.id}}" class="" href="{% url 'orderstatus' i.id %}" role="button">Change Status </a>{% else %}<a class="btn btn-primary " href="{% url 'orderstatus' i.id %}" role="button">Change Status</a>{% endif %}
+                      </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                      {{i.orderdate}}
+                    </td>
+                    
+                   
+                  </tr>
+                  <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cancel Order</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Do you wish to cancel this order ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" data-bs-dismiss="modal">Close</button>
+                          <a href="{% url 'cancelorderr' i.id %}"> <button  type="button" class=" px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Submit</button> </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="modal fade" id="exampleModal2{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"> Order status</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Do you wish to change the order status ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" data-bs-dismiss="modal">Close</button>
+                          <a href="{% url 'orderstatus' i.id %}"> <button  type="button" class=" px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Change</button> </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+          </div>
+        </main>
+        <script>
+          {% for n in messages %}
+          swal('{{ n }}')
+          {% endfor %}
+        </script>
+        {% endblock content %}

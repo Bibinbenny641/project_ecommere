@@ -1,0 +1,81 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<main class="h-full pb-16 overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Banner Management
+    </h2>
+
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3">No</th>
+              <th class="px-4 py-3">Heading</th>
+              <th class="px-4 py-3">Image</th>
+              <th style="height: 60px;  width: 100px;" class="px-4 py-3">Delete</th>
+
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for i in ob %}
+
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+
+                  <div>
+                    <p class="font-semibold"> {{i.id}}</p>
+
+                  </div>
+                </div>
+              </td>
+
+              <td class="px-4 py-3 text-sm">
+                {{i.heading}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                <img style="height: 100ox; width: 100px;" src="{{i.image.url}}" alt="">
+
+              </td>
+
+
+
+              <td class="px-4 py-3 text-xs">
+
+                <span class="">
+                  <a class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700 "
+                    href="{% url 'deletebanner' i.id %}" role="button">Delete</a>
+                </span>
+              </td>
+
+
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <center><a href="{% url 'addbanner'%}">
+            <button
+              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              Add Banner
+            </button>
+          </a></center>
+
+      </div>
+    </div>
+  </div>
+  </main>
+  <script>
+    {% for n in messages %}
+    swal('{{ n }}')
+    {% endfor %}
+  </script>
+    {% endblock content %}

@@ -1,0 +1,440 @@
+{% extends 'demo2.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="animsition">
+
+  <!-- Header -->
+  <header class="header-v4">
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
+      <!-- Topbar -->
+      <div class="top-bar">
+        <div class="content-topbar flex-sb-m h-full container">
+          <div class="left-top-bar">
+            Free shipping for standard order over $100
+          </div>
+
+          <div class="right-top-bar flex-w h-full">
+            <a href="#" class="flex-c-m trans-04 p-lr-25">
+              Help & FAQs
+            </a>
+
+            <a href="{% url 'myprofile' %}" class="flex-c-m trans-04 p-lr-25">
+              My Account
+            </a>
+
+            <a href="#" class="flex-c-m trans-04 p-lr-25">
+              EN
+            </a>
+
+            <a href="#" class="flex-c-m trans-04 p-lr-25">
+              USD
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-menu-desktop how-shadow1">
+        <nav class="limiter-menu-desktop container">
+
+          <!-- Logo desktop -->
+          <a href="{% url 'home' %}" class="logo">
+            <!-- <img src="{% static 'user/images/icons/logo-01.png'%}" alt="IMG-LOGO"> -->
+            <h1 style="color: black;font-family: 'Times New Roman', Times, serif;"><span
+                style="font-weight: 900;">MORE</span> BUY</h1>
+          </a>
+
+          <!-- Menu desktop -->
+          <div class="menu-desktop">
+            <ul class="main-menu">
+              <li>
+                <a href="{% url 'home' %}">Home</a>
+
+              </li>
+
+              <li class="active-menu">
+                <a href="{% url 'viewproduct' %}">Shop</a>
+              </li>
+              <li>
+                <a href="">About</a>
+              </li>
+
+              <li>
+                <a href="">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Icon header -->
+          <div class="wrap-icon-header flex-w flex-r-m">
+
+
+            <div class="" style="padding-right:30px ;">
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'viewcart' %}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{c}}">
+                    <i class="zmdi zmdi-shopping-cart"></i>
+                  </a>
+              {% else %}
+                  
+                  <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'viewcart' %}"><i
+                    class="fa-solid fa-cart-shopping" style="font-size: 20px;"></i></a>
+              {% endif %}
+
+
+            </div>
+            <div class="div" style="padding-right:30px ;">
+              <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'viewwishlist' %}"><i
+                  class="fa-regular fa-heart" style="font-size: 20px;"></i></a>
+
+            </div>
+            <div class="div" style="padding-right:30px ;">
+              <ul class="main-menu">
+                {% if request.user.is_authenticated %}
+                <li class="active-menu">
+                  <a class="me-5" style="text-decoration: none;color: black; "><i class="fa-solid fa-user"
+                      style="font-size: 20px;"></i></a>
+
+                  <ul class="sub-menu">
+                    <li><a href="{% url 'myprofile' %}">My Profile</a></li>
+                    <li><a href="{% url 'myorder' %}">My orders</a></li>
+                    <li><a href="{% url 'logoutuser' %}">Logout</a></li>
+                  </ul>
+                </li>
+                {% else %}
+                <li class="active-menu">
+                  <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'userlogin' %}"><i
+                      class="fa-solid fa-user" style="font-size: 20px;"></i></a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Header Mobile -->
+    <div class="wrap-header-mobile">
+      <!-- Logo moblie -->
+      <div class="logo-mobile">
+        <a href="{% url 'home' %}">
+          <h4 style="color: black;font-family: 'Times New Roman', Times, serif;"><span
+              style="font-weight: 900;">MORE</span> BUY</h4>
+        </a>
+      </div>
+
+      <!-- Icon header -->
+      <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+        {% if request.user.is_authenticated %}
+
+        <a href="{% url 'viewcart' %}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti "data-notify="{{c}}" >
+          <i class="zmdi zmdi-shopping-cart" ></i>
+        </a>
+        {% else %}
+        <a href="{% url 'viewcart' %}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 " >
+          <i class="zmdi zmdi-shopping-cart" ></i>
+        </a>
+        {% endif %}
+        
+        <a href="{% url 'viewwishlist' %}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 ">
+          <i class="zmdi zmdi-favorite-outline"></i>
+        </a>
+
+        <a href="{% url 'myprofile' %}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 ">
+          <i class="fa-solid fa-user"></i>
+        </a>
+      </div>
+
+      <!-- Button show menu -->
+      <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </div>
+    </div>
+
+
+    <!-- Menu Mobile -->
+    <div class="menu-mobile">
+      <ul class="topbar-mobile">
+        <li>
+          <div class="left-top-bar">
+            Free shipping for standard order over $100
+          </div>
+        </li>
+
+        <li>
+          <div class="right-top-bar flex-w h-full">
+            <a href="" class="flex-c-m p-lr-10 trans-04">
+              Help & FAQs
+            </a>
+
+            <a href="#" class="flex-c-m p-lr-10 trans-04">
+              My Account
+            </a>
+
+            <a href="{% url 'myprofile' %}" class="flex-c-m p-lr-10 trans-04">
+              EN
+            </a>
+
+            <a href="" class="flex-c-m p-lr-10 trans-04">
+              USD
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="main-menu-m">
+        <li>
+          <a href="{% url 'viewproduct' %}">Products</a>
+        </li>
+
+        <li>
+          <a href="{% url 'myorder' %}">My Orders</a>
+        </li>
+
+        <li>
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'logoutuser' %}">Logout</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+
+    <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+      <div class="container-search-header">
+        <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+        </button>
+
+        <form class="wrap-search-header flex-w p-l-15">
+
+          <input class="plh3" type="text" name="search" placeholder="Search...">
+        </form>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Product -->
+  <div class="bg0 m-t-23 p-b-140">
+    <div class="container">
+
+      <div class="flex-w flex-sb-m p-b-52">
+        <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+          <a href="{% url 'viewproduct' %}"><button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+              data-filter="*">
+              All Products
+            </button></a>
+            <div>
+              <div class="dropdown">
+                <ul class="main-menu">
+                  <li>
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 dropdown-toggle" type="button" id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Categories
+                </button>
+                <ul class="dropdown-menu sub-menu" aria-labelledby="dropdownMenuButton1">
+                  <li ><a href="{% url 'viewproduct' %}"> All Products</a></li>
+
+                {% for i in cat %}
+                <li><a href="{% url 'filter' i.id %}">{{i.categoryname}}</a></li>
+                {% endfor %}
+                </ul>
+              </li>
+              </ul>
+              </div>
+            </div>
+
+        </div>
+        <div>
+          {% if cate %}
+          <strong><h2 style="color: rgb(129, 163, 222); font-family: 'Times New Roman'">{{cate.categoryname}}</h2></strong>
+          {% else %}
+          <strong><h2 style="color: rgb(129, 163, 222); font-family: 'Times New Roman'">All Products</h2></strong>
+          {% endif %}
+        </div>
+
+        <div class="flex-w flex-c-m m-tb-10">
+
+          <div class="container">
+            <form method="get" action="" class="form-inline">
+              {% csrf_token %}
+              <div class="form-group mx-auto">
+                <input class="form-control mr-sm-2 " name="srch" type="text" placeholder="search" aria-label="Search">
+                <button class="btn btn-info " type="submit">Search</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+        <div class="dis-none panel-search w-full p-t-10 p-b-15">
+          <div class="bor8 dis-flex p-l-15">
+            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+              <i class="zmdi zmdi-search"></i>
+            </button>
+
+            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+          </div>
+        </div>
+      </div>
+
+
+          <!-- .............SEARCH PRODUCT.............. -->
+
+      <div class="container-fluid">
+        <div class="row">
+          {% if match %}
+          {% for i in match %}
+          <div class="col-sm-6 col-md-4 col-lg-3 isotope-item women ">
+            <div class="">
+
+              <div class="block2-pic hov-img0">
+                <div class="border" style="height: 40vh;width: 100%;">
+                  <img src="/media/{{i.image1}}" style="width: 100%;height: 100%;" alt="IMG-PRODUCT">
+                </div>
+
+                <a href="{% url 'singleproduct' i.id %}"
+                  class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+                  View
+                </a>
+              </div>
+
+              <div class="block2-txt flex-w flex-t p-t-14">
+                <div class="block2-txt-child1 flex-col-l ">
+                  <a href="{% url 'singleproduct' i.id %}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                    {{ i.name }}
+                  </a>
+
+                  <span class="stext-105 cl3">
+                    <b> {{ i.price }}</b>
+                  </span>
+                  <!-- <span class="stext-105 cl3">
+                    <strong>Rs {{ i.offeredprice }} &nbsp;</strong>{% if i.proOffer >= 1 %}<del style="color: red;">{{i.price}}</del>{% endif %} &nbsp;&nbsp;
+                    {%if i.stock == 0 %} <span style="color: red;" class="stext-105 cl3">
+                      out of stock {% elif i.stock < 10 %} <bold style="color: red;"> {{ i.stock }} &nbsp;Left</bold>
+                    </span>
+
+                    {% endif %}
+                  </span> -->
+
+                </div>
+
+
+                <div class="block2-txt-child2 flex-r p-t-3">
+
+                  <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'addwishlist' i.id  %}"><i
+                      class="fa-regular fa-heart" style="font-size: 20px;"></i></a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+      <!-- ..............NORMAL VIEW................. -->
+
+
+      <div class="container-fluid">
+        <div class="row">
+          {% for i in users %}
+          <div class="col-sm-6 col-md-4 col-lg-3 isotope-item women ">
+            <div class="">
+
+              <div class="block2-pic hov-img0" style="border-radius: 20px ;">
+                <div class="" style="height: 40vh;width: 100%;">
+                  <img src="/media/{{ i.image1 }}" style="width: 100%;height: 100%;" alt="IMG-PRODUCT">
+
+                </div>
+
+
+                <a href="{% url 'singleproduct' i.id %}"
+                  class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
+                  View
+                </a>
+              </div>
+
+              <div class="block2-txt flex-w flex-t p-t-14">
+                <div class="block2-txt-child1 flex-col-l ">
+                  <a href="" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                    {{ i.name }}
+                  </a>
+
+                  <span class="stext-105 cl3">
+                    <strong>Rs {{ i.offeredprice }} &nbsp;</strong>{% if i.proOffer >= 1 %}<del style="color: red;">{{i.price}}</del>{% endif %} &nbsp;&nbsp;
+                    {%if i.stock == 0 %} <span style="color: red;" class="stext-105 cl3">
+                      out of stock {% elif i.stock < 10 %} <bold style="color: red;"> {{ i.stock }} &nbsp;Left</bold>
+                    </span>
+
+                    {% endif %}
+                  </span>
+
+                </div>
+
+                <div class="block2-txt-child2 flex-col-l p-t-3">
+
+                  <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'addwishlist' i.id  %}"><i
+                      class="fa-regular fa-heart" style="font-size: 20px;"></i></a>
+                    <span class="stext-105 cl3">
+                      {% if i.proOffer >= 1 %}
+                      <p style="color: green;">{{i.proOffer}}%Off</p>
+                      {% endif %}
+                    </span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+        <!-- ....................PAGINATION................. -->
+
+
+      <div class="flex-c-m flex-w w-full p-t-45">
+        
+        <nav class="mt-4" aria-label="Page navigation sample">
+          {% if users.has_other_pages %}
+            <ul class="pagination">
+              {% if users.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{users.previous_page_number}}">Previous</a></li>
+              {% else %}
+              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+              {% endif %}
+        
+              {% for i in users.paginator.page_range %}
+                {% if users.number == i %}
+                  <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+              {% endfor %}
+        
+              {% if users.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{users.next_page_number}}">Next</a></li>
+              {% else %}
+                <li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <div class="btn-back-to-top" id="myBtn">
+    <span class="symbol-btn-back-to-top">
+      <i class="zmdi zmdi-chevron-up"></i>
+    </span>
+  </div>
+</body>
+
+
+{% endblock content %}

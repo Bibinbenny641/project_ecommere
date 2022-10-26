@@ -1,0 +1,137 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+
+<main class="h-full pb-16 overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Coupon Management
+    </h2>
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3"> ID</th>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Code</th>
+              <th class="px-4 py-3">added date</th>
+              <th class="px-4 py-3">validity</th>
+              <th class="px-4 py-3">minimum price</th>
+              <th class="px-4 py-3">Discount</th>
+              <th class="px-4 py-3">Action</th>
+
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for i in coupon %}
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  {{i.id}}
+
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.coupon_name}}
+              </td>
+
+              <td class="px-4 py-3 text-sm">
+                {{i.coupon_code}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.added_date}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.validtill}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.minimum_price}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.discount}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                <a class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700 "
+                  href="{% url 'deletecoupon' i.id %}" role="button">Delete</a>
+              </td>
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <br>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Coupon</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="#" class="signup-form" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-2">
+                  <label class="label" for="name"> Coupon Name</label>
+                  <input type="text" class="form-control text-dark" placeholder="name" name="name" required>
+                </div>
+                <div class="form-group mb-2">
+                  <label class="label" for="name"> Coupon code</label>
+                  <input type="text" class="form-control text-dark" placeholder="code" name="couponcode" required>
+                </div>
+                <div class="form-group mb-2">
+                  <label class="label" for="name">Valid date</label>
+                  <input type="date" class="form-control text-dark" placeholder="valid date" name="validdate" required>
+                </div>
+                <div class="form-group mb-2">
+                  <label class="label" for="name">Minimum price</label>
+                  <input type="number" class="form-control text-dark" placeholder="Minimum price" name="minimumprice"
+                    required>
+                </div>
+                <div class="form-group mb-2">
+                  <label class="label" for="name">Discount</label>
+                  <input type="number" class="form-control text-dark" placeholder="Discount" name="discount" required>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit"
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple form-control btn btn-primary submit px-3">ADD</button>
+                </div>
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button"
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple btn btn-secondary"
+                data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr><hr><br>
+
+      <div>
+        <center><a>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              Add Coupon
+            </button>
+          </a>
+        </center>
+      </div><br>
+
+    </div>
+  </div>
+  <script>
+    {% for n in messages %}
+    swal('{{ n }}')
+    {% endfor %}
+  </script>
+</main>
+{% endblock content %}

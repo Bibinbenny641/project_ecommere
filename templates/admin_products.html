@@ -1,0 +1,110 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block content %}
+<main class="h-full pb-16 overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Product Management
+    </h2>
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3"> ID</th>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Price</th>
+              <th class="px-4 py-3">Stock</th>
+              <th class="px-4 py-3">Quantity</th>
+              <th class="px-4 py-3">Offers</th>
+
+              <th class="px-4 py-3">Edit</th>
+              <th class="px-4 py-3">Remove</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for i in p %}
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+
+                  <div>
+                    <p class="font-semibold"> {{i.id}}</p>
+
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.name}}
+              </td>
+              <td class="px-4 py-3 text-xs">
+
+                {{i.price}}
+                </span>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.stock}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.quantity}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{i.proOffer}}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                <span
+                  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                  <a class="" href="{% url 'editproduct' i.id %}" role="button">EDIT</a>
+                </span>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                <span
+                  class="">
+                  <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.id}}" class=" px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"  role="button">REMOVE</a>
+                </span>
+              </td>
+
+            </tr>
+            <div class="modal fade" id="exampleModal{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to remove {{i.name}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100" data-bs-dismiss="modal">Close</button>
+                    <a href="{% url 'removeproduct' i.id %}"> <button  type="button" class=" px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">Remove</button> </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+
+    </div>
+  </div>
+</main>
+<script>
+  {% for n in messages %}
+  swal('{{ n }}')
+  {% endfor %}
+</script>
+
+     <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+
+{% endblock content %}
