@@ -341,9 +341,9 @@
 
 
       <div class="container-fluid">
-        <div class="row">
+        <div  class="row">
           {% for i in users %}
-          <div class="col-sm-6 col-md-4 col-lg-3 isotope-item women ">
+          <div style="padding-bottom: 40px;" class="col-sm-6 col-md-4 col-lg-3 isotope-item women ">
             <div class="">
 
               <div class="block2-pic hov-img0" style="border-radius: 20px ;">
@@ -366,12 +366,33 @@
                   </a>
 
                   <span class="stext-105 cl3">
-                    <strong>Rs {{ i.offeredprice }} &nbsp;</strong>{% if i.proOffer >= 1 %}<del style="color: red;">{{i.price}}</del>{% endif %} &nbsp;&nbsp;
-                    {%if i.stock == 0 %} <span style="color: red;" class="stext-105 cl3">
+                    <!-- <strong>Rs {{ i.offeredprice }} &nbsp;</strong>{% if i.proOffer  %}<del style="color: red;">{{i.price}}</del>{% endif %} &nbsp;&nbsp; -->
+                    <!-- {%if i.stock == 0 %}
+                     <span style="color: red;" class="stext-105 cl3">
+                      out of stock {% elif i.stock < 10 %} <bold style="color: red;"> {{ i.stock }} &nbsp;Left</bold>
+                    </span>
+
+                    {% endif %} -->
+                    <strong>
+                    
+
+                      {% if i.proOffer >= i.category %}
+                      ₹ {{i.productOfferedPrice}}
+                      <del style="color: red;">{{i.price}}</del>
+                      {% else %}
+                      ₹ {{i.categoryOfferedPrice}}
+                      <del style="color: red;">{{i.price}}</del>
+                      &nbsp;&nbsp;&nbsp;
+                      {%if i.stock == 0 %}
+                     <span style="color: red;" class="stext-105 cl3">
                       out of stock {% elif i.stock < 10 %} <bold style="color: red;"> {{ i.stock }} &nbsp;Left</bold>
                     </span>
 
                     {% endif %}
+                      
+                      {% endif %}
+
+                    </strong>
                   </span>
 
                 </div>
@@ -381,8 +402,15 @@
                   <a class="me-5" style="text-decoration: none;color: black; " href="{% url 'addwishlist' i.id  %}"><i
                       class="fa-regular fa-heart" style="font-size: 20px;"></i></a>
                     <span class="stext-105 cl3">
-                      {% if i.proOffer >= 1 %}
+                      <!-- {% if i.proOffer == 1 %}
                       <p style="color: green;">{{i.proOffer}}%Off</p>
+                      {% else %}
+                      <p style="color: green;">{{i.category.offers}}%Off</p>
+                      {% endif %} -->
+                      {% if i.proOffer >= i.category %}
+                      <p style="color: green;">{{i.proOffer}}%off</p>
+                      {% else %}
+                      <p style="color: green;">{{i.category}}%off</p>
                       {% endif %}
                     </span>
 

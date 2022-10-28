@@ -110,8 +110,7 @@ def addImage(request):
             messages.warning(request,'Product added Successfully')
             return redirect(adminproduct)
 
-
-        print(form)
+        
     else:
         form = StockForm()
     context ={'form':form}
@@ -122,7 +121,9 @@ def viewproduct(request):
     
         products = Stock.objects.all()
         product=[]
+        
         for i in products:
+           
             product.append({
                 "id"    : i.id,
                 "name"  : i.name,
@@ -135,10 +136,12 @@ def viewproduct(request):
                 "image3"    : i.image1,
                 "image4"    : i.image1,
                 "proOffer"  : i.proOffer,
-                "offeredprice" :i.price -  i.price * (i.proOffer/100)
-        
-
+                "category"  : i.category.offers,
+                "productOfferedPrice" :i.price -  i.price * (i.proOffer/100),
+                "categoryOfferedPrice":i.price - i.price * (i.category.offers/100)
+                
             })
+           
         
         paginator = Paginator(product, 8)
         page = request.GET.get('page')

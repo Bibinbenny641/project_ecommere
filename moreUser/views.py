@@ -117,6 +117,9 @@ def usersignup(request):
         if email.isspace():
             messages.error(request,('username should not contain spaces'))
             return redirect(usersignup)
+        if   len(phoneno)!= 10 :
+            messages.error(request,'Phone number must contain 10 numbers')
+            return redirect(usersignup)
         if User.objects.filter(phoneno=phoneno).exists():
             messages.info(request,'phone no already taken')
             return redirect(usersignup)
@@ -131,13 +134,15 @@ def usersignup(request):
             request.session['phoneno']=phoneno
             phone=phoneno
             print(phone)
-            verify.send(phone)
+            # verify.send(phone)
+            
+
             user = User.objects.create_user(fullname = fullname,  email=email, phoneno = phoneno, password=password1)
             user.save()
-            # return redirect(user_login)
+            return redirect(user_login)
             
            
-            return redirect(otp)
+            # return redirect(otp)
     return render(request, 'user_signup.html')
 
 

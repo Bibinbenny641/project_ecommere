@@ -1,7 +1,8 @@
 from datetime import datetime
+from genericpath import exists
 from itertools import product
 import json
-from tkinter.messagebox import NO
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from cartmanagement.models import Cart
@@ -20,12 +21,26 @@ from django.http import JsonResponse
 def checkout(request):
     
     if request.user.is_authenticated and request.user.is_active:
+        print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
         try:
+            cart2 = Cart.objects.filter(userid=request.user.id)
+            print(cart2)
+        except:
+            cart2= None
+
+        
+        try:
+            print('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
             cart = Cart.objects.get(userid=request.user.id)
+            print('heloooooooooooooooooo')
+            print(cart)
         except:
             cart = None
-        if cart is None:
+
+        print(cart)
+        if not cart2 and cart is None:
             return redirect(viewcart)
+        
 
         add = Address.objects.filter(user=request.user)
         ob = Cart.objects.values().filter(userid=request.user.id)

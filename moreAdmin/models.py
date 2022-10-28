@@ -10,7 +10,7 @@ from productmanagement.models import Stock
 # Create your models here.
 
 class UserManager(BaseUserManager):
-    def create_user (self,fullname,phoneno,email,password=None, is_staff=False, is_active=False, is_admin=False):
+    def create_user (self,fullname,phoneno,email,password=None, is_staff=False, is_active=True, is_admin=False):
         if not email:
             raise ValueError('user must have an email address')
         if not password:
