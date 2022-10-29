@@ -166,6 +166,3 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_SID = 'ACeb62919f5e9cc6b4749deb5b30b7ee6'
-AUTH_TOKEN  = '2d89bb23ebfb4980af130a1aa21efce'
-SERVICE_ID  = 'VA03b165cfc2da09e15980af107427722'
