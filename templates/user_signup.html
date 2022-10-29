@@ -14,6 +14,8 @@
 
 	<link rel="stylesheet" href=" {% static 'usersignup/css/style.css'%}">
 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body style="background-color: rgb(191, 173, 173);">
@@ -69,16 +71,17 @@
 
 						</form>
 						<!-- <p>I'm already a member! <a data-toggle="tab" href="#signin">Sign In</a></p> -->
-						<div>
-							{% for message in messages|slice:"0:1" %}
-							<h3> {{ message }}</h3>
-							{% endfor %}
-						</div>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+		{% for n in messages %}
+		swal('{{ n }}')
+		{% endfor %}
+	  </script>
 
 	<!-- <script src="{% static 'usersignup/js/jquery.min.js'%}"></script>
 	<script src="{% static 'usersignup/js/popper.js'%}"></script>

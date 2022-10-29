@@ -12,6 +12,10 @@ urlpatterns = [
     path('address/',views.address,name='address'),
     path('changepassword/',views.changepassword,name='changepassword'),
     path('deleteaddress/<id>',views.deleteaddress,name='deleteaddress'),
+    path('otplogin',views.otplogin,name='otplogin'),
+    path('otp1/ ',views.otp1,name='otp1'),
+
+
 
 
    

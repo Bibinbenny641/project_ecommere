@@ -23,7 +23,7 @@ from productmanagement.views import viewproduct
 from django.views.decorators.cache import never_cache
 
 # Create your views here.
-
+#signup
 def otp(request):
     
     if request.method =='POST':
@@ -38,9 +38,38 @@ def otp(request):
             User.objects.filter(phoneno=phone).update(active=True)
             return redirect(user_login)
         else:
-            return redirect(otp)
+            u = User.objects.filter(phoneno=phone)
+            u.delete()
+            messages.info(request,'sighnup failed pls retry')
+            return redirect(usersignup)
           
 
+    return render(request,'otp.html')
+
+
+#-----------------login with otp verification ------------def otp(request):
+def otp1(request): 
+    if request.method =='POST':
+        code = request.POST['otp']
+        # user = User.objects.get(phone_no=phoneno) 
+        print(code)
+        phone=request.session['phoneno']
+        k=verify.check(phone, code)
+        print(k)
+        if k:
+            print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+            try:
+
+                user = User.objects.get(phoneno=phone)
+                auth.login(request,user)
+            except:
+                return redirect(user_login)
+            messages.info(request,'login success')
+            return redirect(viewproduct)
+        else:
+            
+            messages.info(request,'login failed')
+            return redirect(user_login)
     return render(request,'otp.html')
 
 @never_cache  
@@ -136,13 +165,10 @@ def usersignup(request):
             print(phone)
             verify.send(phone)
             
-
             user = User.objects.create_user(fullname = fullname,  email=email, phoneno = phoneno, password=password1)
+
+            user.save()
             
-            # user.save()
-            # return redirect(user_login)
-            
-           
             return redirect(otp)
     return render(request, 'user_signup.html')
 
@@ -261,3 +287,15 @@ def deleteaddress(request,id):
     dele.delete()
 
     return redirect(myprofile)
+
+
+def otplogin(request):
+    if request.method =='POST':
+        phoneno = request.POST['phoneno']
+        request.session['phoneno']=phoneno
+        h = request.session['phoneno']
+        phone=phoneno
+        print(phone)
+        verify.send(phone)
+        return redirect(otp1)
+    return render(request,'loginotp.html')
