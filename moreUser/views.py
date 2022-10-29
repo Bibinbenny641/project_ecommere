@@ -134,15 +134,16 @@ def usersignup(request):
             request.session['phoneno']=phoneno
             phone=phoneno
             print(phone)
-            # verify.send(phone)
+            verify.send(phone)
             
 
             user = User.objects.create_user(fullname = fullname,  email=email, phoneno = phoneno, password=password1)
-            user.save()
-            return redirect(user_login)
+            
+            # user.save()
+            # return redirect(user_login)
             
            
-            # return redirect(otp)
+            return redirect(otp)
     return render(request, 'user_signup.html')
 
 
