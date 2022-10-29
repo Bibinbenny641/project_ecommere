@@ -117,7 +117,7 @@ def usersignup(request):
         if email.isspace():
             messages.error(request,('username should not contain spaces'))
             return redirect(usersignup)
-        if   len(phoneno)!= 10 :
+        if  len(phoneno)!= 10 :
             messages.error(request,'Phone number must contain 10 numbers')
             return redirect(usersignup)
         if User.objects.filter(phoneno=phoneno).exists():

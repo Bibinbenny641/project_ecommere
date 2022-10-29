@@ -123,7 +123,6 @@ def viewproduct(request):
         product=[]
         
         for i in products:
-           
             product.append({
                 "id"    : i.id,
                 "name"  : i.name,
@@ -132,9 +131,9 @@ def viewproduct(request):
                 "stock"  : i.stock,
                 "description":i.description,
                 "image1"    : i.image1,
-                "image2"    : i.image1,
-                "image3"    : i.image1,
-                "image4"    : i.image1,
+                "image2"    : i.image2,
+                "image3"    : i.image3,
+                "image4"    : i.image4,
                 "proOffer"  : i.proOffer,
                 "category"  : i.category.offers,
                 "productOfferedPrice" :i.price -  i.price * (i.proOffer/100),
@@ -179,11 +178,13 @@ def viewproduct(request):
                 "stock"  : i.stock,
                 "description":i.description,
                 "image1"    : i.image1,
-                "image2"    : i.image1,
-                "image3"    : i.image1,
-                "image4"    : i.image1,
+                "image2"    : i.image2,
+                "image3"    : i.image3,
+                "image4"    : i.image4,
                 "proOffer"  : i.proOffer,
-                "offeredprice" :i.price -  i.price * (i.proOffer/100)
+                "category"  : i.category.offers,
+                "productOfferedPrice" :i.price -  i.price * (i.proOffer/100),
+                "categoryOfferedPrice":i.price - i.price * (i.category.offers/100)
 
 
             })
