@@ -57,7 +57,7 @@ def otp1(request):
         k=verify.check(phone, code)
         print(k)
         if k:
-            print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+            
             try:
 
                 user = User.objects.get(phoneno=phone)
