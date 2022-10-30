@@ -52,7 +52,7 @@ def otp1(request):
     if request.method =='POST':
         code = request.POST['otp']
         # user = User.objects.get(phone_no=phoneno) 
-        print(code)
+
         phone=request.session['phoneno']
         k=verify.check(phone, code)
         print(k)
